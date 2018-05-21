@@ -34,3 +34,11 @@ let getFilteredTasks = function(department){
 }
 
 export { getFilteredTasks }
+
+let deleteTask = function(id){
+  return fetch(BASE+`/tasks/:${id}`,{
+    method: "DELETE"
+  })
+}
+
+export { deleteTask }

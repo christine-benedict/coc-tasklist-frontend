@@ -7,7 +7,7 @@ import Tasks from './pages/Tasks'
 import NewTask from './pages/NewTask'
 import IndividualDepartment from './pages/IndividualDepartment'
 
-import { getTasks, createTask } from './api'
+import { getTasks, createTask, deleteTask } from './api'
 
 class App extends Component {
   constructor(props){
@@ -15,6 +15,7 @@ class App extends Component {
     this.state = {
       tasks: [],
       newTaskSuccess: false,
+      deleteTaskSuccess: false
     }
   }
   componentWillMount(){
@@ -27,15 +28,21 @@ class App extends Component {
     }).then( getTasks().then( APItasks => { this.setState({tasks:APItasks, newTaskSuccess: true}) }))
     }
 
+  handleDelete(){
+    deleteTask(this.state.tasks.id).then( successDelete => {console.log("DELETED! Successfully deleted Task: ", successDelete)})
+  }
+
   render() {
     return (
         <div>
             <Header />
             <Router>
                 <Switch>
-                    <Route exact path="/tasks" render={ (props) => <Tasks tasks={this.state.tasks} />} />
+                    <Route exact path="/tasks" render={ (props) => <Tasks tasks={this.state.tasks} deleteTask={this.handleDelete.bind(this)} />} />
                     <Route exact path="/" render={ (props) => <NewTask handleNewTask={this.handleNew.bind(this)} success={this.state.newTaskSuccess} />} />
                     <Route exact path="/admin" render={ (props) => <IndividualDepartment department="admin"/>} />
+                    <Route exact path="/ops" render={ (props) => <IndividualDepartment department="ops"/>} />
+                    <Route exact path="/maint" render={ (props) => <IndividualDepartment department="maint"/>} />
                 </Switch>
             </Router>
         </div>
