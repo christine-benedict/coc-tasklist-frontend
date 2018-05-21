@@ -24,3 +24,13 @@ let createTask = function(task){
 }
 
 export { createTask }
+
+let getFilteredTasks = function(){
+  return fetch(BASE+`/${this.state.department}`).then( (rawResponse) => {
+    let parsedResponse = rawResponse.json()
+    console.log(parsedResponse)
+    return parsedResponse
+  })
+}
+
+export { getFilteredTasks }

@@ -81,7 +81,7 @@ class NewTask extends Component{
               type="submit"
               name="submit"
               id="submit-button"
-              onChange={this.handleSubmit.bind(this)}
+              onClick={this.handleSubmit.bind(this)}
               value= "Add Task"
             />
           </form>
