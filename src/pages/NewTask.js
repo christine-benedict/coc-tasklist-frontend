@@ -28,65 +28,67 @@ class NewTask extends Component{
   }
   render(){
     return(
-      <Grid>
+      <div>
         <AdminNavbar />
-        <div id="new-task-form">
-          <form >
-            <FormControl
-              type="text"
-              name="name"
-              className="new-form"
-              placeholder="Task Description"
-              onChange={this.handleChange.bind(this)}
-              value={this.state.form.name}
-            /><br />
-            <ControlLabel>Department Responsible:  </ControlLabel>
-            <FormGroup className="new-form">
-              <Radio name="poc" value="Admin" onChange={this.handleChange.bind(this)} inline>
-                Admin
-              </Radio>{' '}
-              <Radio name="poc" value="Operations" onChange={this.handleChange.bind(this)} inline>
-                Ops
-              </Radio>{' '}
-              <Radio name="poc" value="Maintenance" onChange={this.handleChange.bind(this)} inline>
-                Maintenance
-              </Radio>
-            </FormGroup>
-            <FormControl
-              type="date"
-              name="duedate"
-              className="new-form"
-              placeholder="Due Date"
-              onChange={this.handleChange.bind(this)}
-              value={this.state.form.duedate}
-            /><br />
-            <FormControl
-              type="text"
-              name="dminuscat"
-              className="new-form"
-              placeholder="D-Category"
-              onChange={this.handleChange.bind(this)}
-              value={this.state.form.dminuscat}
-            /><br />
-            <textarea
-              form ="new-task-form"
-              name="notes"
-              className="new-form"
-              placeholder="Notes"
-              cols="70"
-              rows="10"
-              wrap="soft">
-            </textarea><br />
-            <FormControl
-              type="submit"
-              name="submit"
-              id="submit-button"
-              onClick={this.handleSubmit.bind(this)}
-              value= "Add Task"
-            />
-          </form>
-        </div>
-      </Grid>
+        <Grid>
+          <div id="new-task-form">
+            <form >
+              <FormControl
+                type="text"
+                name="name"
+                className="new-form"
+                placeholder="Task Description"
+                onChange={this.handleChange.bind(this)}
+                value={this.state.form.name}
+              /><br />
+              <ControlLabel>Department Responsible:  </ControlLabel>
+              <FormGroup className="new-form">
+                <Radio name="poc" value="Admin" onChange={this.handleChange.bind(this)} inline>
+                  Admin
+                </Radio>{' '}
+                <Radio name="poc" value="Operations" onChange={this.handleChange.bind(this)} inline>
+                  Ops
+                </Radio>{' '}
+                <Radio name="poc" value="Maintenance" onChange={this.handleChange.bind(this)} inline>
+                  Maintenance
+                </Radio>
+              </FormGroup>
+              <FormControl
+                type="date"
+                name="duedate"
+                className="new-form"
+                placeholder="Due Date"
+                onChange={this.handleChange.bind(this)}
+                value={this.state.form.duedate}
+              /><br />
+              <FormControl
+                type="text"
+                name="dminuscat"
+                className="new-form"
+                placeholder="D-Category"
+                onChange={this.handleChange.bind(this)}
+                value={this.state.form.dminuscat}
+              /><br />
+              <textarea
+                form ="new-task-form"
+                name="notes"
+                className="new-form"
+                placeholder="Notes"
+                cols="70"
+                rows="10"
+                wrap="soft">
+              </textarea><br />
+              <FormControl
+                type="submit"
+                name="submit"
+                id="submit-button"
+                onClick={this.handleSubmit.bind(this)}
+                value= "Add Task"
+              />
+            </form>
+          </div>
+        </Grid>
+      </div>
     )
   }
 }

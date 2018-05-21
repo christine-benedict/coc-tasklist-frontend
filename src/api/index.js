@@ -35,10 +35,16 @@ let getFilteredTasks = function(department){
 
 export { getFilteredTasks }
 
-let deleteTask = function(id){
-  return fetch(BASE+`/tasks/:${id}`,{
-    method: "DELETE"
+
+let deleteTask = function(id) {
+  return fetch(BASE+ '/tasks/' + id, {
+    method: 'delete'
   })
+  // .then(response =>
+  //   response.json().then(json => {
+  //     return json;
+  //   })
+  // )
 }
 
 export { deleteTask }

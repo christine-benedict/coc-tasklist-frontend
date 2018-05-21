@@ -28,8 +28,8 @@ class App extends Component {
     }).then( getTasks().then( APItasks => { this.setState({tasks:APItasks, newTaskSuccess: true}) }))
     }
 
-  handleDelete(){
-    deleteTask(this.state.tasks.id).then( successDelete => {console.log("DELETED! Successfully deleted Task: ", successDelete)})
+  handleDelete(id){
+    deleteTask(id).then( successDelete => {console.log("DELETED! Successfully deleted Task: ", successDelete)})
   }
 
   render() {

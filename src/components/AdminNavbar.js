@@ -12,14 +12,17 @@ class AdminNavbar extends Component{
             </Navbar.Brand>
           </Navbar.Header>
           <Nav pullLeft>
-            <NavItem eventKey={1} href="/tasks">
+            <NavItem eventKey={1} href="/">
+              Create New Tasks
+            </NavItem>
+            <NavItem eventKey={2} href="/tasks">
               List All Tasks
             </NavItem>
-            <NavDropdown eventKey={2} title="Departments" id="basic-nav-dropdown">
-              <MenuItem eventKey={2.1} href="/admin">Admin</MenuItem>
-              <MenuItem eventKey={2.2} href="/maintenance">Maintenance</MenuItem>
-              <MenuItem eventKey={2.3} href="/operations">Operations</MenuItem>
-              <MenuItem eventKey={2.4}>Another Department</MenuItem>
+            <NavDropdown eventKey={3} title="Departments" id="basic-nav-dropdown">
+              <MenuItem eventKey={3.1} href="/admin">Admin</MenuItem>
+              <MenuItem eventKey={3.2} href="/maintenance">Maintenance</MenuItem>
+              <MenuItem eventKey={3.3} href="/operations">Operations</MenuItem>
+              <MenuItem eventKey={3.4}>Another Department</MenuItem>
             </NavDropdown>
           </Nav>
         </Navbar>
