@@ -14,7 +14,6 @@ class App extends Component {
     super(props)
     this.state = {
       tasks: [],
-      filteredTasks: [],
       newTaskSuccess: false,
     }
   }
@@ -36,7 +35,7 @@ class App extends Component {
                 <Switch>
                     <Route exact path="/tasks" render={ (props) => <Tasks tasks={this.state.tasks} />} />
                     <Route exact path="/" render={ (props) => <NewTask handleNewTask={this.handleNew.bind(this)} success={this.state.newTaskSuccess} />} />
-                    <Route exact path="/admin" render={ (props) => <IndividualDepartment tasks={this.state.filteredTasks} department="admin"/>} />
+                    <Route exact path="/admin" render={ (props) => <IndividualDepartment department="admin"/>} />
                 </Switch>
             </Router>
         </div>

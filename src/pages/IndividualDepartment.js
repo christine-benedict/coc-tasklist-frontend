@@ -7,11 +7,11 @@ class IndividualDepartment extends Component{
   constructor(props){
     super(props)
     this.state={
-      filteredTasks: []
+      tasks: []
     }
   }
   componentWillMount(){
-    getFilteredTasks(this.props.department).then(filteredTasks => this.setState({filteredTasks: filteredTasks}))
+    getFilteredTasks(this.props.department).then(filteredTasks => this.setState({tasks: filteredTasks}))
   }
   render(){
     return(
@@ -19,7 +19,7 @@ class IndividualDepartment extends Component{
         <Row>
         <Col s={8}>
           <ListGroup>
-            {this.props.tasks.map((task, index) =>{
+            {this.state.tasks.map((task, index) =>{
               return (
                 <ListGroupItem
                   key={index}
