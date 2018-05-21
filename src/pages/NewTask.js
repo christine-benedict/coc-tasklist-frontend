@@ -10,7 +10,7 @@ class NewTask extends Component{
       form: {
         name:'',
         poc: '',
-        taskstatus: 'incomplete',
+        taskstatus: 'Incomplete',
         duedate: '',
         dminuscat: '',
         notes: ''
@@ -76,7 +76,9 @@ class NewTask extends Component{
                 placeholder="Notes"
                 cols="70"
                 rows="10"
-                wrap="soft">
+                wrap="soft"
+                onChange={this.handleChange.bind(this)}
+                value={this.state.form.notes}>
               </textarea><br />
               <FormControl
                 type="submit"

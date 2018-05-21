@@ -20,8 +20,8 @@ class AdminNavbar extends Component{
             </NavItem>
             <NavDropdown eventKey={3} title="Departments" id="basic-nav-dropdown">
               <MenuItem eventKey={3.1} href="/admin">Admin</MenuItem>
-              <MenuItem eventKey={3.2} href="/maintenance">Maintenance</MenuItem>
-              <MenuItem eventKey={3.3} href="/operations">Operations</MenuItem>
+              <MenuItem eventKey={3.2} href="/maint">Maintenance</MenuItem>
+              <MenuItem eventKey={3.3} href="/ops">Operations</MenuItem>
               <MenuItem eventKey={3.4}>Another Department</MenuItem>
             </NavDropdown>
           </Nav>
