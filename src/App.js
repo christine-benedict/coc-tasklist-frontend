@@ -15,7 +15,6 @@ class App extends Component {
     this.state = {
       tasks: [],
       newTaskSuccess: false,
-      adminTasks: []
     }
   }
   componentWillMount(){
@@ -23,8 +22,8 @@ class App extends Component {
     })
   }
 
-  handleNew(){
-    createTask().then( successTask => { console.log("SUCCESS! New Task: ", successTask)
+  handleNew(data){
+    createTask(data).then( successTask => { console.log("SUCCESS! New Task: ", successTask)
     }).then( getTasks().then( APItasks => { this.setState({tasks:APItasks, newTaskSuccess: true}) }))
     }
 

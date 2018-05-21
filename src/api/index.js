@@ -10,16 +10,6 @@ let getTasks = function(){
 
 export { getTasks }
 
-let getSortedTasks = function(requestedFilter){
-  return fetch(BASE+`/${requestedFilter}`).then( (rawResponse) => {
-    let parsedResponse = rawResponse.json()
-    console.log(parsedResponse)
-    return parsedResponse
-  })
-}
-
-export { getSortedTasks }
-
 let createTask = function(task){
   return fetch(BASE+"/tasks",{
     body: JSON.stringify(task),
