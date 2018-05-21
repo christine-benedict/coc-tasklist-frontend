@@ -1,8 +1,18 @@
 import React, {Component} from 'react'
 import { Grid, Col, Row, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { getFilteredTasks } from '../api'
 
 
 class IndividualDepartment extends Component{
+  constructor(props){
+    super(props)
+    this.state={
+      filteredTasks: []
+    }
+  }
+  componentWillMount(){
+    getFilteredTasks(this.props.department).then(filteredTasks => this.setState({filteredTasks: filteredTasks}))
+  }
   render(){
     return(
       <Grid>
