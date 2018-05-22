@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Grid, FormControl, FormGroup, Radio, ControlLabel } from 'react-bootstrap'
 import AdminNavbar from '../components/AdminNavbar'
+import Flag from '../components/Flag'
 
 
 class NewTask extends Component{
@@ -30,6 +31,7 @@ class NewTask extends Component{
     return(
       <div>
         <AdminNavbar />
+        {this.props.success && <Flag flagtext="New task created."/>}
         <Grid>
           <div id="new-task-form">
             <form >
@@ -53,6 +55,7 @@ class NewTask extends Component{
                   Maintenance
                 </Radio>
               </FormGroup>
+              <ControlLabel>Due Date:  </ControlLabel>
               <FormControl
                 type="date"
                 name="duedate"
