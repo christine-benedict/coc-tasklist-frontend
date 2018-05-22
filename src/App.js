@@ -7,7 +7,7 @@ import Tasks from './pages/Tasks'
 import NewTask from './pages/NewTask'
 import IndividualDepartment from './pages/IndividualDepartment'
 
-import { getTasks, createTask, deleteTask } from './api'
+import { getTasks, createTask, deleteTask, updateTask } from './api'
 
 class App extends Component {
   constructor(props){
@@ -25,11 +25,16 @@ class App extends Component {
 
   handleNew(data){
     createTask(data).then( successTask => { console.log("SUCCESS! New Task: ", successTask)
-    }).then( getTasks().then( APItasks => { this.setState({tasks:APItasks, newTaskSuccess: true}) }))
+  }).then( this.setState({newTaskSuccess: true}))
     }
 
   handleDelete(id){
-    deleteTask(id).then( successDelete => {console.log("DELETED! Successfully deleted Task: ", successDelete)})
+    deleteTask(id).then( successDelete => {console.log("DELETED! Successfully deleted Task: ", successDelete)}).then( getTasks().then( APItasks => { this.setState({tasks:APItasks, deleteTaskSuccess: true})
+  }))
+  }
+
+  handleUpdate(id){
+    updateTask(id).then( successUpdate => {console.log("UPDATED! Successfully updated Task: ", successUpdate)})
   }
 
   render() {
@@ -38,11 +43,11 @@ class App extends Component {
             <Header />
             <Router>
                 <Switch>
-                    <Route exact path="/tasks" render={ (props) => <Tasks tasks={this.state.tasks} deleteTask={this.handleDelete.bind(this)} />} />
+                    <Route exact path="/tasks" render={ (props) => <Tasks tasks={this.state.tasks} deleteTask={this.handleDelete.bind(this)} success={this.state.deleteTaskSuccess} />} />
                     <Route exact path="/" render={ (props) => <NewTask handleNewTask={this.handleNew.bind(this)} success={this.state.newTaskSuccess} />} />
-                    <Route exact path="/admin" render={ (props) => <IndividualDepartment department="admin"/>} />
-                    <Route exact path="/ops" render={ (props) => <IndividualDepartment department="ops"/>} />
-                    <Route exact path="/maint" render={ (props) => <IndividualDepartment department="maint"/>} />
+                    <Route exact path="/admin" render={ (props) => <IndividualDepartment department="admin" handleUpdateTask={this.handleUpdate.bind(this)}/>} />
+                    <Route exact path="/ops" render={ (props) => <IndividualDepartment department="ops" handleUpdateTask={this.handleUpdate.bind(this)}/>} />
+                    <Route exact path="/maint" render={ (props) => <IndividualDepartment department="maint" handleUpdateTask={this.handleUpdate.bind(this)}/>} />
                 </Switch>
             </Router>
         </div>

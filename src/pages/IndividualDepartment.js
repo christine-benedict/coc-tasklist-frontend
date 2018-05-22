@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import { Grid, Col, Row, ListGroup, ListGroupItem } from 'react-bootstrap'
+import { Grid, Col, Row, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
 import { getFilteredTasks } from '../api'
 
 
@@ -7,11 +7,18 @@ class IndividualDepartment extends Component{
   constructor(props){
     super(props)
     this.state={
-      tasks: []
+      tasks: [],
+      completedSuccess: false
     }
   }
   componentWillMount(){
     getFilteredTasks(this.props.department).then(filteredTasks => this.setState({tasks: filteredTasks}))
+  }
+  markComplete(id){
+    this.props.handleUpdateTask(id)
+    getFilteredTasks(this.props.department).then( filteredTasks => { this.setState({tasks:filteredTasks, completedSuccess: true})
+    console.log(this.state.completedSuccess)
+   })
   }
   render(){
     return(
@@ -42,7 +49,12 @@ class IndividualDepartment extends Component{
                   </span>
                   <span className='task-notes'>
                     Notes: {task.notes}
-                  </span>
+                  </span><br />
+                  <span>
+                    <br />
+                  <Button bsStyle="success" bsSize="xsmall" value={task.id} onClick={this.markComplete.bind(this, task.id)}>Mark Complete</Button>{this.state.completedSuccess && window.location.reload() }
+                  <Button bsStyle="default" bsSize="xsmall" value={task.id}>Edit Notes</Button>
+                </span>
                 </ListGroupItem>
               )
             })}

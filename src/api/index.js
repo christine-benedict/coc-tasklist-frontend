@@ -35,16 +35,22 @@ let getFilteredTasks = function(department){
 
 export { getFilteredTasks }
 
+let updateTask = function(id){
+  return fetch(BASE+"/done/"+id,{
+    method: "PUT"
+  }).then( (rawResponse) => {
+    let parsedResponse = rawResponse.json()
+    return parsedResponse
+  })
+}
+
+export { updateTask }
+
 
 let deleteTask = function(id) {
   return fetch(BASE+ '/tasks/' + id, {
     method: 'delete'
   })
-  // .then(response =>
-  //   response.json().then(json => {
-  //     return json;
-  //   })
-  // )
 }
 
 export { deleteTask }

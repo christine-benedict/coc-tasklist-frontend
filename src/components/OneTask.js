@@ -36,6 +36,7 @@ class OneTask extends Component{
             <br />
             <Button bsStyle="danger" bsSize="xsmall" value={task.id} onClick={this.handleDelete.bind(this)}>Delete Task</Button>
           </span>
+          {this.props.success && window.location.reload() }
         </ListGroupItem>
       </div>
     )

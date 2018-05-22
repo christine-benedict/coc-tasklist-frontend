@@ -16,7 +16,7 @@ class Tasks extends Component {
             <ListGroup>
               {this.props.tasks.map((task, index) =>{
                 return (
-                  <OneTask task={task} key={index} deleteTask={this.props.deleteTask}/>
+                  <OneTask task={task} key={index} deleteTask={this.props.deleteTask} success={this.props.success}/>
                 )
               })}
             </ListGroup>
