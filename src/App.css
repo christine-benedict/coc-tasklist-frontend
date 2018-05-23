@@ -34,7 +34,9 @@ Alert{
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
-
+textarea{
+  resize: none;
+}
 #new-task-form{
   width: 100%;
   align-content: center
@@ -49,4 +51,11 @@ Alert{
 #new-task-form #submit-button{
   width: 100px;
   align-content:
+}
+
+#edit-buttons{
+  display: inline-flex;
+  float: right;
+  align: center;
+  margin-right: 0px;
 }

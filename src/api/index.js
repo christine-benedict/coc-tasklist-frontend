@@ -46,6 +46,16 @@ let updateTask = function(id){
 
 export { updateTask }
 
+let editNotes = function(id){
+  return fetch(BASE+"/edit_notes/"+id,{
+    method: "PUT"
+  }).then( (rawResponse) => {
+    let parsedResponse = rawResponse.json()
+    return parsedResponse
+  })
+}
+
+export { editNotes }
 
 let deleteTask = function(id) {
   return fetch(BASE+ '/tasks/' + id, {

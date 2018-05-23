@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import { Grid, Col, Row, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
-import { getFilteredTasks } from '../api'
+import { getFilteredTasks, editNotes } from '../api'
+import EditForm from '../components/EditForm'
 
 
 class IndividualDepartment extends Component{
@@ -20,12 +21,18 @@ class IndividualDepartment extends Component{
     console.log(this.state.completedSuccess)
    })
   }
+  editTaskNotes(id){
+    editNotes(id)
+    getFilteredTasks(this.props.department).then( filteredTasks => { this.setState({tasks:filteredTasks, completedSuccess: true})
+    console.log(this.state.completedSuccess)
+   })
+  }
   render(){
     return(
       <Grid>
         <Row>
         <Col s={8}>
-          <ListGroup>
+          <ListGroup style={{flexDirection: 'row', alignItems: 'center'}}>
             {this.state.tasks.map((task, index) =>{
               return (
                 <ListGroupItem
@@ -38,23 +45,24 @@ class IndividualDepartment extends Component{
                       {' '}- <small className='task-poc'>{task.poc}</small>
                     </h4>
                   }>
-                  <span className='task-taskstatus'>
-                    Status: {task.taskstatus}{" | "}
+                  <span style={{flex: 1}}>
+                    <span className='task-taskstatus'>
+                      Status: {task.taskstatus}{" | "}
+                    </span>
+                    <span className='task-duedate'>
+                      Due Date: {task.duedate}{" | "}
+                    </span>
+                    <span className='task-dminuscat'>
+                      D-Category: {task.dminuscat}{" | "}
+                    </span>
+                    <span className='task-notes'>
+                      Notes: {task.notes}
+                    </span>
                   </span>
-                  <span className='task-duedate'>
-                    Due Date: {task.duedate}{" | "}
+                  <span id="edit-buttons">
+                    <Button bsStyle="success" bsSize="xsmall" value={task.id} onClick={this.markComplete.bind(this, task.id)}>Mark Complete</Button>{this.state.completedSuccess && window.location.reload() }
+                    <EditForm edit={this.editTaskNotes.bind(this, task.id)} notes={task.notes} id={task.id}/>
                   </span>
-                  <span className='task-dminuscat'>
-                    D-Category: {task.dminuscat}{" | "}
-                  </span>
-                  <span className='task-notes'>
-                    Notes: {task.notes}
-                  </span><br />
-                  <span>
-                    <br />
-                  <Button bsStyle="success" bsSize="xsmall" value={task.id} onClick={this.markComplete.bind(this, task.id)}>Mark Complete</Button>{this.state.completedSuccess && window.location.reload() }
-                  <Button bsStyle="default" bsSize="xsmall" value={task.id}>Edit Notes</Button>
-                </span>
                 </ListGroupItem>
               )
             })}
