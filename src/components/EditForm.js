@@ -1,5 +1,8 @@
 import React, {Component} from 'react'
 import {Modal, Button} from 'react-bootstrap'
+import {editNotes, getFilteredTasks} from '../api'
+
+
 
 class EditForm extends Component {
   constructor(props, context) {
@@ -7,9 +10,12 @@ class EditForm extends Component {
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
+    const previousNotes = this.props.notes || ""
 
     this.state = {
-      show: false
+      show: false,
+      notes: previousNotes,
+      completedSuccess: false
     };
   }
 
@@ -20,8 +26,21 @@ class EditForm extends Component {
   handleShow() {
     this.setState({ show: true });
   }
+  handleChange(event){
+    let {notes} = this.state
+    notes = event.target.value
+    this.setState({notes: notes})
+  }
+
+  editTaskNotes(id){
+    editNotes(id)
+    getFilteredTasks(this.props.department).then( filteredTasks => { this.setState({tasks:filteredTasks, completedSuccess: true})
+    console.log(this.state.completedSuccess)
+   })
+  }
 
   render() {
+
     return (
       <span>
         <Button bsStyle="primary" bsSize="xsmall" onClick={this.handleShow}>
@@ -38,13 +57,14 @@ class EditForm extends Component {
               cols="70"
               rows="10"
               wrap="soft"
+              value={this.state.notes}
+              onChange={this.handleChange.bind(this)}
             >
-              {this.props.notes}
             </textarea>
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose} bsSize="sm">Cancel</Button>
-            <Button bsStyle="success" bsSize="sm" onClick={this.props.edit}>Save</Button>
+            <Button bsStyle="success" bsSize="sm" onClick={this.editTaskNotes.bind(this, this.props.id)}>Save</Button>
           </Modal.Footer>
         </Modal>
       </span>

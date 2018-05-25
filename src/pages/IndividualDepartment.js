@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import { Grid, Col, Row, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
-import { getFilteredTasks, editNotes } from '../api'
+import { getFilteredTasks } from '../api'
 import EditForm from '../components/EditForm'
 
 
@@ -21,12 +21,7 @@ class IndividualDepartment extends Component{
     console.log(this.state.completedSuccess)
    })
   }
-  editTaskNotes(id){
-    editNotes(id)
-    getFilteredTasks(this.props.department).then( filteredTasks => { this.setState({tasks:filteredTasks, completedSuccess: true})
-    console.log(this.state.completedSuccess)
-   })
-  }
+
   render(){
     return(
       <Grid>
@@ -61,7 +56,7 @@ class IndividualDepartment extends Component{
                   </span>
                   <span id="edit-buttons">
                     <Button bsStyle="success" bsSize="xsmall" value={task.id} onClick={this.markComplete.bind(this, task.id)}>Mark Complete</Button>{this.state.completedSuccess && window.location.reload() }
-                    <EditForm edit={this.editTaskNotes.bind(this, task.id)} notes={task.notes} id={task.id}/>
+                    <EditForm department={this.props.department} notes={task.notes} id={task.id}/>
                   </span>
                 </ListGroupItem>
               )
