@@ -15,6 +15,9 @@ class IndividualDepartment extends Component{
   componentWillMount(){
     getFilteredTasks(this.props.department).then(filteredTasks => this.setState({tasks: filteredTasks}))
   }
+  componentDidUpdate(){
+    getFilteredTasks(this.props.department).then(filteredTasks => this.setState({tasks: filteredTasks}))
+  }
   markComplete(id){
     this.props.handleUpdateTask(id)
     getFilteredTasks(this.props.department).then( filteredTasks => { this.setState({tasks:filteredTasks, completedSuccess: true})
@@ -55,7 +58,7 @@ class IndividualDepartment extends Component{
                     </span>
                   </span>
                   <span id="edit-buttons">
-                    <Button bsStyle="success" bsSize="xsmall" value={task.id} onClick={this.markComplete.bind(this, task.id)}>Mark Complete</Button>{this.state.completedSuccess && window.location.reload() }
+                    <Button bsStyle="success" bsSize="xsmall" value={task.id} onClick={this.markComplete.bind(this, task.id)}>Mark Complete</Button>
                     <EditForm department={this.props.department} notes={task.notes} id={task.id}/>
                   </span>
                 </ListGroupItem>

@@ -12,7 +12,7 @@ class AdminNavbar extends Component{
             </Navbar.Brand>
           </Navbar.Header>
           <Nav pullLeft>
-            <NavItem eventKey={1} href="/">
+            <NavItem eventKey={1} href="/create">
               Create New Tasks
             </NavItem>
             <NavItem eventKey={2} href="/tasks">

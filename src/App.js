@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './App.css';
-import Header from './components/Header'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
+import Header from './components/Header'
+import Dashboard from './pages/Dashboard'
 import Tasks from './pages/Tasks'
 import NewTask from './pages/NewTask'
 import IndividualDepartment from './pages/IndividualDepartment'
@@ -43,8 +44,9 @@ class App extends Component {
             <Header />
             <Router>
                 <Switch>
+                    <Route exact path="/" render={ (props) => <Dashboard tasks={this.state.tasks} />} />
                     <Route exact path="/tasks" render={ (props) => <Tasks tasks={this.state.tasks} deleteTask={this.handleDelete.bind(this)} success={this.state.deleteTaskSuccess} />} />
-                    <Route exact path="/" render={ (props) => <NewTask handleNewTask={this.handleNew.bind(this)} success={this.state.newTaskSuccess} />} />
+                    <Route exact path="/create" render={ (props) => <NewTask handleNewTask={this.handleNew.bind(this)} success={this.state.newTaskSuccess} />} />
                     <Route exact path="/admin" render={ (props) => <IndividualDepartment department="admin" handleUpdateTask={this.handleUpdate.bind(this)}/>} />
                     <Route exact path="/ops" render={ (props) => <IndividualDepartment department="ops" handleUpdateTask={this.handleUpdate.bind(this)}/>} />
                     <Route exact path="/maint" render={ (props) => <IndividualDepartment department="maint" handleUpdateTask={this.handleUpdate.bind(this)}/>} />

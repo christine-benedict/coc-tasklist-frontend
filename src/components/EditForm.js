@@ -10,12 +10,11 @@ class EditForm extends Component {
 
     this.handleShow = this.handleShow.bind(this);
     this.handleClose = this.handleClose.bind(this);
-    const previousNotes = this.props.notes || ""
 
     this.state = {
       show: false,
-      notes: previousNotes,
-      completedSuccess: false
+      notes: this.props.notes || "",
+      editSuccess: false
     };
   }
 
@@ -33,10 +32,9 @@ class EditForm extends Component {
   }
 
   editTaskNotes(id){
-    editNotes(id)
-    getFilteredTasks(this.props.department).then( filteredTasks => { this.setState({tasks:filteredTasks, completedSuccess: true})
-    console.log(this.state.completedSuccess)
-   })
+    let {notes} = this.state
+    editNotes(id, notes).then(this.setState({editSuccess: true}))
+    this.handleClose()
   }
 
   render() {
@@ -64,7 +62,7 @@ class EditForm extends Component {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose} bsSize="sm">Cancel</Button>
-            <Button bsStyle="success" bsSize="sm" onClick={this.editTaskNotes.bind(this, this.props.id)}>Save</Button>
+            <Button bsStyle="success" bsSize="sm" value={this.props.id} onClick={this.editTaskNotes.bind(this, this.props.id)}>Save</Button>
           </Modal.Footer>
         </Modal>
       </span>

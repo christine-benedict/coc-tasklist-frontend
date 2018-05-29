@@ -46,9 +46,13 @@ let updateTask = function(id){
 
 export { updateTask }
 
-let editNotes = function(id){
+let editNotes = function(id, notes){
   return fetch(BASE+"/edit_notes/"+id,{
-    method: "PUT"
+    body: JSON.stringify({notes: notes}),
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    method: "PATCH"
   }).then( (rawResponse) => {
     let parsedResponse = rawResponse.json()
     return parsedResponse
