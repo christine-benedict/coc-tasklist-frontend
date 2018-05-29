@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import { Grid, Col, Row, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
+import { Grid, Col, Row, ListGroup, ListGroupItem } from 'react-bootstrap'
 import { getFilteredTasks } from '../api'
 import EditForm from '../components/EditForm'
+import CompletionButton from '../components/CompletionButton'
 
 
 class IndividualDepartment extends Component{
@@ -15,9 +16,7 @@ class IndividualDepartment extends Component{
   componentWillMount(){
     getFilteredTasks(this.props.department).then(filteredTasks => this.setState({tasks: filteredTasks}))
   }
-  componentDidUpdate(){
-    getFilteredTasks(this.props.department).then(filteredTasks => this.setState({tasks: filteredTasks}))
-  }
+
   markComplete(id){
     this.props.handleUpdateTask(id)
     getFilteredTasks(this.props.department).then( filteredTasks => { this.setState({tasks:filteredTasks, completedSuccess: true})
@@ -58,7 +57,7 @@ class IndividualDepartment extends Component{
                     </span>
                   </span>
                   <span id="edit-buttons">
-                    <Button bsStyle="success" bsSize="xsmall" value={task.id} onClick={this.markComplete.bind(this, task.id)}>Mark Complete</Button>
+                    <CompletionButton id={task.id} status={task.taskstatus} handleComplete={this.markComplete.bind(this, task.id)} />{this.state.completedSuccess && window.location.reload()}
                     <EditForm department={this.props.department} notes={task.notes} id={task.id}/>
                   </span>
                 </ListGroupItem>

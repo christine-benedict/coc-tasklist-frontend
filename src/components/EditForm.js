@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {Modal, Button} from 'react-bootstrap'
-import {editNotes, getFilteredTasks} from '../api'
+import {editNotes} from '../api'
 
 
 
@@ -62,7 +62,7 @@ class EditForm extends Component {
           </Modal.Body>
           <Modal.Footer>
             <Button onClick={this.handleClose} bsSize="sm">Cancel</Button>
-            <Button bsStyle="success" bsSize="sm" value={this.props.id} onClick={this.editTaskNotes.bind(this, this.props.id)}>Save</Button>
+            <Button bsStyle="success" bsSize="sm" value={this.props.id} onClick={this.editTaskNotes.bind(this, this.props.id)}>Save</Button>{this.state.editSuccess && window.location.reload()}
           </Modal.Footer>
         </Modal>
       </span>
